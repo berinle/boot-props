@@ -36,7 +36,6 @@ public class MyTest {
 
 ///////////////////////// Domain objects
 @Component
-@ConfigurationProperties
 class Foo {
   private String name;
   private Bar bar;
@@ -68,7 +67,6 @@ class Foo {
 }
 
 @Component
-@ConfigurationProperties(prefix = "bar")
 class Bar {
   private String password;
 
@@ -85,6 +83,7 @@ class Bar {
 @Configuration
 class MyTestConfig {
   @Bean
+  @ConfigurationProperties(prefix = "foo")
   public Foo foo() {
     Foo foo = new Foo();
     foo.setBar(bar());
@@ -92,6 +91,7 @@ class MyTestConfig {
   }
 
   @Bean
+  @ConfigurationProperties(prefix = "foo2")
   public Foo handCraftedFoo() {
     Foo foo = new Foo();
     foo.setName("boy");
@@ -102,6 +102,7 @@ class MyTestConfig {
   }
 
   @Bean
+  @ConfigurationProperties(prefix = "bar")
   public Bar bar() {
     return new Bar();
   }
